@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 // Components
 import { AppComponent } from './app.component';
-
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
@@ -15,8 +14,7 @@ import { APP_ROUTES } from './app.routes';
 import { PagesModule } from './pages/pages.module';
 
 // Services
-import { SharedService } from './services/shared.service';
-import { SidebarService } from './services/sidebar.service';
+import { ServiceModule } from "./services/service.module";
 
 @NgModule({
   declarations: [
@@ -28,9 +26,10 @@ import { SidebarService } from './services/sidebar.service';
     BrowserModule,
     PagesModule,
 	APP_ROUTES,
-	FormsModule
+	FormsModule,
+	ServiceModule
   ],
-  providers: [SharedService, SidebarService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 

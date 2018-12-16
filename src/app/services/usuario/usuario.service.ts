@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
-import { URL_SERVICIOS } from 'src/app/config/config';
+import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
@@ -90,9 +90,12 @@ export class UsuarioService {
 
         return this.http.put( url, usuario )
             .pipe(map((resp:any) => {
-                const usuarioDB: Usuario = resp.usuario;
+
+                if (usuario._id === this.usuario._id){
+                    const usuarioDB: Usuario = resp.usuario;
+                    this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+                }
                 swal('Usuario actualizado', usuario.nombre, 'success');
-                this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
                 return true;
             }));
         
@@ -108,5 +111,28 @@ export class UsuarioService {
             .catch( resp => {
                 console.log(resp);
             });
+    }
+
+    cargarUsuarios( desde: number = 0){
+        const url = URL_SERVICIOS + '/usuario?desde=' + desde;
+        return this.http.get(url);
+    }
+
+    buscarUsuario( termino: string){
+        console.log(termino);
+        const url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+        return this.http.get(url)
+            .pipe(map((resp:any) => {
+                return resp.usuarios;
+            }));
+    }
+
+    borrarUsuario( id: string){
+        const url = URL_SERVICIOS + '/usuario/' + id + '?token=' + this.token;
+        return this.http.delete(url)
+            .pipe(map((resp:any) => {
+                swal('Usuario borrado', 'El usuario ha si eliminado correctamente', 'success');
+                return true;
+            }));
     }
 }

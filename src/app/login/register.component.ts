@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
-import { switchAll } from 'rxjs/operators';
 
 import swal from 'sweetalert';
 import { Usuario } from '../models/usuario.model';
@@ -53,7 +52,7 @@ export class RegisterComponent implements OnInit {
         this.forma.setValue({
             nombre: 'Nombre',
             correo: 'test@test.com',
-            password: '123',
+            password: '1234',
             password2: '1234',
             condiciones: true
         });

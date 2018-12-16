@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
-import { UsuarioService } from 'src/app/services/service.index';
+import { UsuarioService } from '../../services/service.index';
 
 @Component({
     selector: 'app-profile',
@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
         const reader = new FileReader();
         const urlImagenTemp = reader.readAsDataURL(archivo);
         reader.onloadend = () => {
-            this.imagenTemp = reader.result;
+            this.imagenTemp = String(reader.result);
         };
     }
 

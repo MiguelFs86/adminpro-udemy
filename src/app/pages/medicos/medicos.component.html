@@ -31,7 +31,7 @@
                 <tbody>
                     <tr *ngFor="let medico of medicos">
                         <td>
-                            <img (click)="actualizarImagen( medico )" [src]="medico.img | imagen:'medico'" class="img-50 img-circle">
+                            <img [routerLink]="['/medico', medico._id]" [src]="medico.img | imagen:'medico'" class="img-50 img-circle">
                         </td>
                         <td>{{ medico.nombre }}</td>
                         <td>{{ medico.hospital.nombre }}</td>

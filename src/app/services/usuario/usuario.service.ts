@@ -119,7 +119,6 @@ export class UsuarioService {
     }
 
     buscarUsuario( termino: string){
-        console.log(termino);
         const url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
         return this.http.get(url)
             .pipe(map((resp:any) => {

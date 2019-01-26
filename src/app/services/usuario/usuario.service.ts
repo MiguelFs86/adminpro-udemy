@@ -6,6 +6,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import { throwError } from 'rxjs';
+import swal from 'sweetalert';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +21,23 @@ export class UsuarioService {
                 public router: Router,
                 public _subirArchivoService: SubirArchivoService) { 
         this.cargarStorage();
+    }
+
+    renuevaToken(){
+        let url = URL_SERVICIOS + '/login/renuevatoken';
+        url += '?token=' + this.token;
+
+        return this.http.get( url)
+            .pipe(map((resp:any) => {
+                this.token = resp.token;
+                localStorage.setItem('token', resp.token);
+                return true;
+            }),
+            catchError( err => {
+                this.router.navigate(['/login']);
+                swal('No se pudo renovar token', 'No fue posible renovar el token', 'error');
+                return throwError(err);
+            }));
     }
 
     estaLogueado(){

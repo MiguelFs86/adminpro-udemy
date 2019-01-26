@@ -19,15 +19,14 @@ export class PromesasComponent implements OnInit {
 	contarTres(): Promise<boolean>{
 		return new Promise( (resolve, reject)=>{
 			let contador = 0;
-			let intervalo = setInterval( ()=>{
+			const intervalo = setInterval( ()=>{
 				contador += 1;
 				console.log(contador);
-				if (contador == 3){
-					//reject('Blablabla');
+				if (contador === 3){
 					resolve(true);
 					clearInterval(intervalo);
 				}
-			},1000 )
+			},1000 );
 		});
 	}
 	

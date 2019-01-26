@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginGuardGuard } from './guards/login-guard.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { VerificaTokenGuard } from './guards/verifica-token.guard';
 
 import { SettingsService, 
 		SharedService, 
@@ -26,6 +27,7 @@ import { MedicoService } from './medico/medico.service';
         ServiceModule,
         LoginGuardGuard,
         AdminGuard,
+        VerificaTokenGuard,
         SubirArchivoService,
         ModalUploadService,
         UsuarioService,

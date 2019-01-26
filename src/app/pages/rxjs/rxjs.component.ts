@@ -30,12 +30,12 @@ export class RxjsComponent implements OnInit, OnDestroy {
 	regresaObservable(): Observable<any>{
 		return new Observable( (observer: Subscriber<any>) => {
 			let contador = 0;
-			let intervalo = setInterval( () => {
+			const intervalo = setInterval( () => {
 				contador ++;
 
 				const salida = {
 					valor: contador
-				}
+				};
 				observer.next(salida);
 
 				// if (contador === 3){
@@ -60,7 +60,7 @@ export class RxjsComponent implements OnInit, OnDestroy {
 					return false;
 				}
 			})
-		)
+		);
 	}
 	
 }
